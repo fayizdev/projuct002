@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projuct002/utils/constnads/color_constands.dart';
 import 'package:projuct002/utils/constnads/image_constands.dart';
+import 'package:projuct002/view/bottom_navebar_screen/bottom_navebar_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -11,13 +12,45 @@ class OnboardingScreen extends StatelessWidget {
       body: Stack(
         children: [
           _buildbackgroundimage(),
-          _buildGradientSection(),
+          _buildGradientSection(context),
+          Positioned(
+            top: 25,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.white,
+                  size: 20,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                RichText(
+                  text: TextSpan(
+                      text: "60k+",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 18),
+                      children: [
+                        TextSpan(
+                            text: "  Premium recipes",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 16)),
+                      ]),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
   }
 
-  Positioned _buildGradientSection() {
+  Positioned _buildGradientSection(BuildContext context) {
     return Positioned(
       right: 0,
       bottom: 0,
@@ -51,29 +84,38 @@ class OnboardingScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
-                ),
-                decoration: BoxDecoration(
-                    color: ColorConstands.primaryColor,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Start cooking",
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    )
-                  ],
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavbarScreen(),
+                      ));
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                  decoration: BoxDecoration(
+                      color: ColorConstands.primaryColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Start cooking",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
                 ),
               )
             ],
